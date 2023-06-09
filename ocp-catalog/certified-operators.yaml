@@ -1,0 +1,54 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  annotations:
+    operatorframework.io/managed-by: marketplace-operator
+    target.workload.openshift.io/management: '{"effect": "PreferredDuringScheduling"}'
+  creationTimestamp: "2023-06-08T18:41:15Z"
+  generation: 1
+  name: certified-operators
+  namespace: openshift-marketplace
+  resourceVersion: "36140"
+  uid: e821245f-f083-4188-9631-3e5869578a0a
+spec:
+  displayName: Certified Operators
+  grpcPodConfig:
+    nodeSelector:
+      kubernetes.io/os: linux
+      node-role.kubernetes.io/master: ""
+    priorityClassName: system-cluster-critical
+    securityContextConfig: restricted
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/master
+      operator: Exists
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 120
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 120
+  icon:
+    base64data: ""
+    mediatype: ""
+  image: registry.redhat.io/redhat/certified-operator-index:v4.13
+  priority: -200
+  publisher: Red Hat
+  sourceType: grpc
+  updateStrategy:
+    registryPoll:
+      interval: 10m
+status:
+  connectionState:
+    address: certified-operators.openshift-marketplace.svc:50051
+    lastConnect: "2023-06-08T18:44:52Z"
+    lastObservedState: READY
+  latestImageRegistryPoll: "2023-06-08T19:14:15Z"
+  registryService:
+    createdAt: "2023-06-08T18:41:15Z"
+    port: "50051"
+    protocol: grpc
+    serviceName: certified-operators
+    serviceNamespace: openshift-marketplace
